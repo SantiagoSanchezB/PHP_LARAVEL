@@ -52,6 +52,23 @@
             <p class="text-danger">{{ $message }}</p>
          @enderror
     </div>
+
+    <div class="form-group p-2">
+        <label >Categoria</label>
+        <select name="Category" class="form-control">
+            @foreach ($category as $categories)
+                    <option value="{{ $categories->id }}" {{ $product->categories_id === $categories->id ? 'selected' : '' }}>
+                        {{ $categories->name }}
+                    </option>
+            @endforeach
+        </select>
+
+        @error('Brand')
+            <p class="text-danger">{{ $message }}</p>
+         @enderror
+    </div>
+
+
     <div class="form-group p-2">
         <button type="submit" class="btn btn-success">Guardar</button>
         <a href="{{ route('/products')}}" class="btn btn-danger " >Cancelar</a>

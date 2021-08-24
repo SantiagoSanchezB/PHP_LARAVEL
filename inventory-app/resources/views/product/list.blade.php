@@ -23,6 +23,7 @@
             <th>Price</th>
             <th>Quantity</th>
             <th>Brand</th>
+            <th>Categoria</th>
             <th><a href="{{ route('prodRegister')}}" class="btn btn-primary" style="float: right">Agregar Producto</a></th>
         </tr>
     </thead>
@@ -34,6 +35,7 @@
             <td>{{ $product->Price}}</td>
             <td>{{ $product->quantity}}</td>
             <td>{{ $product->Brand->name}}</td>
+            <td>{{ $product->categories->name}}</td>
             <td>
                 <a href="{{ route('prodRegister',['id' => $product->id]) }}" class="btn btn-info">Editar</a>
                 {{-- <a href="/product/delete/{{ $product->id }}" class="btn btn-danger">Eliminar</a> --}}
