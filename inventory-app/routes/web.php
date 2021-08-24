@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -19,6 +20,12 @@ Route::get('/brands', [BrandController::class, 'show'])->name('/brands')->middle
 Route::get('/brand/delete/{id}', [BrandController::class, 'delete'])->name('braDelete');
 Route::get('/brand/Register/{id?}', [BrandController::class, 'form'])->name('braRegister');
 Route::post('/brand/Save', [BrandController::class, 'register'])->name('BrandSave');
+
+//Categories
+Route::get('/categories', [CategoriesController::class, 'show'])->name('/categories')->middleware('auth');
+Route::get('/categories/delete/{id}', [CategoriesController::class, 'delete'])->name('catDelete');
+Route::get('/categories/Register/{id?}', [CategoriesController::class, 'form'])->name('catRegister');
+Route::post('/categories/Save', [CategoriesController::class, 'register'])->name('catSave');
 
 Auth::routes();
 
