@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Brand;
+use App\Models\Categories;
 use GuzzleHttp\Psr7\Message;
 
 class ProductController extends Controller
 {
     // Listar Productos
     function show(){
-        $productList = Product::has('brand')->get();
+        $brand = Product::has('brand')->get();
         // return dd($productList);
-        return view('product/list',['productsList'=>$productList]);
+        return view('product/list',['productsList'=>$brand]);
     }
 
     function delete($id){
@@ -30,7 +31,8 @@ class ProductController extends Controller
         }
 
         $brands = Brand::all();
-        return view('product/register',['product' => $product, 'brands' => $brands]);
+        $category = Categories::all();
+        return view('product/register',['product' => $product, 'brands' => $brands, 'category' =>$category]);
     }
 
     function register(Request $request){
@@ -44,13 +46,15 @@ class ProductController extends Controller
             'Cost' => 'required',
             'Price' => 'required',
             'Quantity' => 'required|numeric',
-            'Brand' => 'required'
+            'Brand' => 'required',
+            'Category' => 'required'
         ]);
         $product -> name = $request ->Name;
         $product -> cost = $request ->Cost;
         $product -> price = $request ->Price;
         $product -> quantity = $request ->Quantity;
         $product -> Brand_id = $request ->Brand;
+        $product -> categories_id = $request ->Category;
         $product ->save();
         return redirect('/products')->with('agregate', 'Producto Agregado');
     }
