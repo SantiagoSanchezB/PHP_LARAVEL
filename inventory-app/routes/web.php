@@ -30,7 +30,7 @@ Route::get('/categories/Register/{id?}', [CategoriesController::class, 'form'])-
 Route::post('/categories/Save', [CategoriesController::class, 'register'])->name('catSave');
 
 //Invoice
-Route::get('/invoice/{id}',[InvoiceController::class, 'Show']);
+Route::get('/invoices',[InvoiceController::class, 'Show']);
 
 Auth::routes();
 

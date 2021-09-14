@@ -7,8 +7,8 @@ use App\Models\Invoice;
 
 class InvoiceController extends Controller
 {
-    function Show($id){
-        $invoice = Invoice::findOrFail($id);
-        return dd($invoice);
+    function Show(){
+        $invoices = Invoice::all();
+        return view('invoice.list',['invoices' => $invoices]);
     }
 }

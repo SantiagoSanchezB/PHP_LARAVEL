@@ -11,6 +11,6 @@ class Invoice extends Model
     use HasFactory;
 
     function products() {
-        return $this -> belongstoMany(Product::class,'invoice_details');
+        return $this -> belongstoMany(Product::class,'invoice_details')->withPivot('price','quantity');
     }
 }
