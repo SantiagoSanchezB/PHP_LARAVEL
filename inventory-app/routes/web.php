@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +28,9 @@ Route::get('/categories', [CategoriesController::class, 'show'])->name('/categor
 Route::get('/categories/delete/{id}', [CategoriesController::class, 'delete'])->name('catDelete');
 Route::get('/categories/Register/{id?}', [CategoriesController::class, 'form'])->name('catRegister');
 Route::post('/categories/Save', [CategoriesController::class, 'register'])->name('catSave');
+
+//Invoice
+Route::get('/invoice/{id}',[InvoiceController::class, 'Show']);
 
 Auth::routes();
 
