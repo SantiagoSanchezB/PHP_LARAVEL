@@ -1,30 +1,25 @@
 @extends('layout')
-@section('title',$cat->id ? 'Editar Categoria' : 'Nueva Categoria')
-@section('encabezado',$cat->id ? 'Editar Categoria': 'Agregar Categoria')
+@section('title', 'Nueva Factura')
+@section('encabezado','Nueva Factura')
 @section('content')
 
-<form action="{{ route('catSave') }}" method="POST" style="width: 100%; padding-top: 2%;"> {{-- --}}
-    @csrf
-    <input type="hidden" class="form-control" name="id" value="{{  old('id') ? old('id'):$cat->id}}">
-    <div class="form-group p-2" >
-      <label>Nombre Categoria</label>
-      <input type="text" name="Name" class="form-control" placeholder="Ingrese el nombre del marca" value="{{  old('Name') ? old('Name'):$cat->name}}" >
-         @error('Name')
-             <p class="text-danger">{{ $message }}</p>
-         @enderror
-    </div>
-    <div class="form-group p-2" >
-        <label>Descripcion</label>
-        <textarea name="Description" class="form-control" placeholder="Ingrese descripcion" >{{  old('Name') ? old('Name'):$cat->description}}</textarea>
-           @error('Name')
-               <p class="text-danger">{{ $message }}</p>
-           @enderror
-      </div>
+    <form action="{{ route('invSave') }}" method="POST" style="width: 100%; padding-top: 2%;">
+        @csrf
+        <div class="row">
+            <div class="col-sm-6">
+                <select name="Product[]" id="product" class="form-select">
+                    @foreach ($products as $product)
+                        <option value="{{$product->id}}">{{ $product->Name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <input type="number" name="Quantity[]" class="form-control">
+            </div>
+        </div>
+    </form>
+@endsection
 
+@section('scripts')
 
-    <div class="form-group p-2">
-        <button type="submit" class="btn btn-success">Guardar</button>
-        <a href="{{ route('/categories')}}" class="btn btn-danger " >Cancelar</a>
-    </div>
-</form>
 @endsection

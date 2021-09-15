@@ -10,7 +10,7 @@
                 <th>Fecha</th>
                 <th>Subtotal</th>
                 <th>Total</th>
-                <th><a href="" class="btn btn-primary" style="float: right">Agregar Invoice</a></th>
+                <th><a href="{{ route('invRegister')}}" class="btn btn-primary" style="float: right">Agregar Invoice</a></th>
             </tr>
         </thead>
         <tbody>
@@ -22,8 +22,6 @@
                     <td>${{ number_format($invoice->total,0,",",".") }}</td>
                     <td>
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal{{ $invoice->id }}">Detalle</button>
-                        <a href="" class="btn btn-info">Editar</a>
-                        <a href="" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
 
@@ -49,6 +47,22 @@
                                     <div class="col-sm-3">{{$product->pivot->quantity * $product->pivot->price}}</div>
                                 </div>
                             @endforeach
+
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-3">Subtotal</div>
+                                <div class="col-sm-3">${{ number_format($invoice->subtotal,0,",",".") }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-3">IVA:</div>
+                                <div class="col-sm-3">${{ number_format($invoice->total-$invoice->subtotal,0,",",".") }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-3">Total</div>
+                                <div class="col-sm-3">${{ number_format($invoice->total,0,",",".") }}</div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
